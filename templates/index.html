@@ -1,0 +1,606 @@
+<!--
+==============================================================================
+FILE: templates/index.html
+==============================================================================
+PURPOSE:
+The primary user-facing HTML5 document for Druva Teja's portfolio website.
+Rendered on the server by FastAPI using the Jinja2 templating engine.
+
+RESPONSIBILITIES:
+1. Provide semantic, accessible, SEO-optimized HTML5 structure.
+2. Render dynamic profile, project, skill, and milestone data passed from 'routes.py'.
+3. Integrate styling from 'static/css/style.css' and client logic from 'static/js/main.js'.
+4. Serve as the professional, digital headquarters for recruiters and peers.
+
+CONNECTED FILES:
+- routes.py: Loads JSON data from /data and feeds it into this Jinja2 template.
+- static/css/style.css: Supplies all visual aesthetics, glassmorphism, and responsive design.
+- static/js/main.js: Handles canvas particles, typing animation, scroll spy, and AJAX form.
+- static/images/*: Visual schematics, logo, and favicon.
+
+BEGINNER EXPLANATION:
+Jinja2 syntax looks like double curly braces or for-loop tags.
+When someone visits your website, FastAPI fills in those placeholders with
+real data from your JSON files before sending the finished HTML to the browser!
+==============================================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Character Encoding & Viewport -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Primary SEO Meta Tags -->
+  <title>Druva Teja C | Backend & AI Developer</title>
+  <meta name="title" content="{{ personal_info.name }} — {{ personal_info.title }}">
+  <meta name="description" content="{{ personal_info.short_bio }}">
+  <meta name="keywords" content="Druva Teja C, Backend Developer, Python, FastAPI, MySQL, Computer Vision, YOLOv8, OpenCV, Smart India Hackathon, SDE Intern, Bengaluru, Portfolio">
+  <meta name="author" content="Druva Teja C">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#050505">
+
+  <!-- Open Graph / Facebook / LinkedIn Social Cards -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ request.url }}">
+  <meta property="og:title" content="{{ personal_info.name }} — {{ personal_info.title }}">
+  <meta property="og:description" content="{{ personal_info.headline }} — {{ personal_info.short_bio }}">
+  <meta property="og:image" content="/static/images/project-mobisense.svg">
+  <meta property="og:site_name" content="Druva Teja C Portfolio">
+
+  <!-- Twitter Meta Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ personal_info.name }} — {{ personal_info.title }}">
+  <meta name="twitter:description" content="{{ personal_info.headline }}">
+  <meta name="twitter:image" content="/static/images/project-mobisense.svg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg">
+
+  <!-- Primary Stylesheet (Pure CSS3, zero external frameworks) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <!-- Screen Reader Accessibility Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Ambient Interactive Canvas Particle Background -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <!-- =========================================================================
+       NAVIGATION BAR (Linear / Apple Glass Header)
+       ========================================================================= -->
+  <header class="site-header" role="banner">
+    <div class="container nav-container">
+      <!-- Brand / Logo -->
+      <a href="#hero" class="brand-logo" aria-label="Druva Teja Home">
+        <span class="brand-icon">DT</span>
+        <span>Druva Teja</span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav role="navigation" aria-label="Main Navigation">
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#leadership" class="nav-link">Leadership</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Nav CTA Action -->
+      <div class="nav-actions">
+        <a href="#contact" class="btn btn-primary btn-sm">Get in Touch</a>
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-menu-btn" id="mobile-toggle" aria-label="Toggle mobile menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================= -->
+  <main id="main-content" role="main">
+
+    <!-- =======================================================================
+         01. HERO SECTION
+         ======================================================================= -->
+    <section id="hero" class="hero-section" aria-label="Introduction">
+      <div class="hero-glow-1" aria-hidden="true"></div>
+      
+      <div class="container">
+        <div class="hero-content">
+
+          <!-- Real-Time Availability Pill -->
+          <div class="status-pill reveal">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span>{{ personal_info.status_badge }}</span>
+          </div>
+
+          <!-- Master Headline -->
+          <h1 class="hero-title reveal">
+            Hi, I'm <span class="text-gradient">{{ personal_info.name }}</span>
+          </h1>
+
+          <!-- Dynamic Role Subtitle with Typewriter Animation -->
+          <div class="hero-subtitle-wrapper reveal">
+            <span>I'm a</span>
+            <span id="typing-text" class="typing-text" data-roles='{{ personal_info.roles | tojson }}'>Full Stack Developer</span>
+          </div>
+
+          <!-- Hero Narrative Description -->
+          <p class="hero-description reveal">
+            {{ personal_info.hero_description }}
+          </p>
+
+          <!-- Call to Action Buttons -->
+          <div class="hero-cta-group reveal">
+            <a href="#projects" class="btn btn-primary">
+              <span>View Projects</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="#contact" class="btn btn-secondary">
+              <span>Contact Me</span>
+            </a>
+            <a href="{{ personal_info.resume_url }}" class="btn btn-secondary" download="Druva_Teja_C_Resume.pdf" target="_blank" rel="noopener noreferrer">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Download Resume</span>
+            </a>
+          </div>
+
+          <p class="hero-links reveal">
+            <a href="{{ personal_info.github_url }}" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="{{ personal_info.linkedin_url }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="mailto:{{ personal_info.email }}">{{ personal_info.email }}</a>
+          </p>
+
+          <!-- Metric Highlights Strip -->
+          <div class="hero-metrics glass-card reveal">
+            {% for metric in personal_info.metrics %}
+            <div class="metric-item">
+              <div class="metric-value">{{ metric.value }}</div>
+              <div class="metric-label">{{ metric.label }}</div>
+            </div>
+            {% endfor %}
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Animated Scroll Down Indicator -->
+      <a href="#about" class="scroll-indicator" aria-label="Scroll to About section">
+        <div class="mouse-icon">
+          <div class="mouse-wheel"></div>
+        </div>
+        <span>Scroll</span>
+      </a>
+    </section>
+
+    <!-- =======================================================================
+         02. ABOUT SECTION (Bento Glass Architecture)
+         ======================================================================= -->
+    <section id="about" class="about-section" aria-label="About Druva Teja C">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <span class="section-tag">About</span>
+          <h2 class="section-title">{{ personal_info.about.section_title }}</h2>
+          <p class="section-subtitle">
+            Who I am, what I build, where I study and what I'm aiming for.
+          </p>
+        </div>
+
+        <!-- 4-Card Bento Grid -->
+        <div class="about-grid">
+          <!-- Bento Card 1: My Journey -->
+          <article class="glass-card about-card reveal">
+            <div class="about-card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+            </div>
+            <h3 class="about-card-title">{{ personal_info.about.cards[0].title }}</h3>
+            <p class="about-card-text">{{ personal_info.about.cards[0].text }}</p>
+          </article>
+
+          <!-- Bento Card 2: Why I Started Coding -->
+          <article class="glass-card about-card reveal">
+            <div class="about-card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
+            <h3 class="about-card-title">{{ personal_info.about.cards[1].title }}</h3>
+            <p class="about-card-text">{{ personal_info.about.cards[1].text }}</p>
+          </article>
+
+          <!-- Bento Card 3: What I'm Learning Right Now -->
+          <article class="glass-card about-card reveal">
+            <div class="about-card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+            </div>
+            <h3 class="about-card-title">{{ personal_info.about.cards[2].title }}</h3>
+            <p class="about-card-text">{{ personal_info.about.cards[2].text }}</p>
+          </article>
+
+          <!-- Bento Card 4: Long-Term Vision -->
+          <article class="glass-card about-card reveal">
+            <div class="about-card-icon" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            </div>
+            <h3 class="about-card-title">{{ personal_info.about.cards[3].title }}</h3>
+            <p class="about-card-text">{{ personal_info.about.cards[3].text }}</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         03. SKILLS SECTION (Categorized Technical Arsenal)
+         ======================================================================= -->
+    <section id="skills" class="skills-section" aria-label="Technical Skills">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <span class="section-tag">Skills</span>
+          <h2 class="section-title">What I work with</h2>
+          <p class="section-subtitle">
+            Every skill here is one I've used in a project below, with the project named.
+          </p>
+        </div>
+
+        <!-- Skills Grid Loaded From skills.json -->
+        <div class="skills-grid">
+          {% for category in skills %}
+          <div class="glass-card skill-category-card reveal">
+            <div class="skill-cat-header">
+              <div class="skill-cat-icon" aria-hidden="true">
+                {% if category.icon == 'code' %}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                {% elif category.icon == 'server' %}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                {% elif category.icon == 'database' %}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                {% elif category.icon == 'cpu' %}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+                {% else %}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                {% endif %}
+              </div>
+              <h3 class="skill-cat-title">{{ category.category }}</h3>
+            </div>
+            
+            <p class="skill-cat-desc">{{ category.description }}</p>
+
+            <div class="skill-items-list">
+              {% for item in category.skills %}
+              <div class="skill-item">
+                <div class="skill-item-header">
+                  <span class="skill-name">{{ item.name }}</span>
+                  <span class="skill-level-badge">{{ item.used_in }}</span>
+                </div>
+                <p class="skill-highlight">{{ item.highlight }}</p>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         04. FEATURED PROJECTS SECTION (Linear / Stripe Style Cards)
+         ======================================================================= -->
+    <section id="projects" class="projects-section" aria-label="Featured Projects">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <span class="section-tag">Projects</span>
+          <h2 class="section-title">Things I've built</h2>
+          <p class="section-subtitle">
+            Two hackathon prototypes and one independent full-stack site, each with a real backend and database.
+          </p>
+        </div>
+
+        <!-- Project Cards Loop -->
+        <div class="projects-container">
+          {% for project in projects %}
+          <article class="glass-card project-card reveal">
+            <!-- Project Visual Schematic -->
+            <div class="project-preview">
+              <img src="{{ project.image }}" alt="{{ project.title }} Interface Preview" class="project-image" loading="lazy">
+            </div>
+
+            <!-- Project Details & Case Study Information -->
+            <div class="project-info">
+              <span class="project-category-tag">{{ project.category }}</span>
+              <h3 class="project-title">{{ project.title }}</h3>
+              <p class="project-tagline">{{ project.tagline }}</p>
+
+              <!-- Problem & Solution Overview -->
+              <div class="project-architecture-box">
+                <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">What I built</strong>
+                {{ project.summary }}
+              </div>
+
+              <!-- Key Technical Highlights -->
+              <ul class="project-highlights-list">
+                {% for highlight in project.highlights %}
+                <li>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  <span>{{ highlight }}</span>
+                </li>
+                {% endfor %}
+              </ul>
+
+              <!-- Technology Badges -->
+              <div class="project-tech-tags">
+                {% for tech in project.technologies %}
+                <span class="badge badge-primary">{{ tech }}</span>
+                {% endfor %}
+              </div>
+
+              <!-- Action Links -->
+              <div class="project-actions">
+                <a href="{{ project.github_url }}" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                  <span>GitHub</span>
+                </a>
+                {% if project.demo_url %}<a href="{{ project.demo_url }}" class="btn btn-primary btn-sm">
+                  <span>Live Demo</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                </a>{% endif %}
+              </div>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         05. LEADERSHIP & ACHIEVEMENTS SECTION (Timeline Architecture)
+         ======================================================================= -->
+    <section id="leadership" class="leadership-section" aria-label="Leadership and Achievements">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <span class="section-tag">Leadership</span>
+          <h2 class="section-title">Leading teams and a student club</h2>
+          <p class="section-subtitle">
+            Vice President of the Advanced Tech Club and Team Lead in three hackathon rounds.
+          </p>
+        </div>
+
+        <!-- Vertical Timeline Component -->
+        <div class="timeline-container">
+          {% for item in achievements %}
+          <div class="timeline-item reveal">
+            <!-- Glowing Timeline Node -->
+            <div class="timeline-node" aria-hidden="true"></div>
+
+            <!-- Timeline Content Card -->
+            <div class="glass-card timeline-card">
+              <div class="timeline-header">
+                <div>
+                  <h3 class="timeline-role">{{ item.role }}</h3>
+                  <div class="timeline-org">{{ item.organization }}</div>
+                </div>
+                <div style="text-align: right;">
+                  <span class="badge badge-purple">{{ item.badge }}</span>
+                  <div class="timeline-period">{{ item.period }}</div>
+                </div>
+              </div>
+
+              <p class="timeline-desc">{{ item.description }}</p>
+
+              <ul class="timeline-bullets">
+                {% for point in item.highlights %}
+                <li>{{ point }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         06. CONTACT SECTION (FastAPI Async Integration)
+         ======================================================================= -->
+    <section id="contact" class="contact-section" aria-label="Contact Druva Teja C">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="section-header reveal">
+          <span class="section-tag">Contact</span>
+          <h2 class="section-title">Let's talk</h2>
+          <p class="section-subtitle">
+            Internship or junior developer opening, a hackathon team, or a project idea? Send me a message.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <!-- Left Column: Context & Social Links -->
+          <div class="glass-card contact-info-card reveal">
+            <div>
+              <h3 class="contact-bio-title">Looking for an SDE internship</h3>
+              <p class="contact-bio-text">
+                I'm a first-year student ready to contribute on real software: backend APIs, databases, or computer-vision features. I'd like to learn from an engineering team while shipping useful code.
+              </p>
+            </div>
+
+            <div class="contact-details-list">
+              <!-- Location -->
+              <div class="contact-detail-item">
+                <div class="contact-detail-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
+                <div>
+                  <div class="contact-detail-label">Location</div>
+                  <div class="contact-detail-val">{{ personal_info.location }}</div>
+                </div>
+              </div>
+
+              <!-- Email -->
+              <div class="contact-detail-item">
+                <div class="contact-detail-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <div>
+                  <div class="contact-detail-label">Direct Email</div>
+                  <div class="contact-detail-val">
+                    <a href="mailto:{{ personal_info.email }}">{{ personal_info.email }}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Icon Links -->
+            <div>
+              <div class="contact-detail-label" style="margin-bottom: 8px;">Connect Digitally</div>
+              <div class="social-links-bar">
+                <a href="{{ personal_info.github_url }}" class="social-icon-btn" aria-label="GitHub Profile" target="_blank" rel="noopener noreferrer">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                </a>
+                <a href="{{ personal_info.linkedin_url }}" class="social-icon-btn" aria-label="LinkedIn Profile" target="_blank" rel="noopener noreferrer">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Interactive Contact Form -->
+          <div class="glass-card contact-form-card reveal">
+            <!-- Status Feedback Container -->
+            <div id="form-feedback" class="form-feedback" role="alert" aria-live="polite"></div>
+
+            <form id="contact-form" class="contact-form" novalidate>
+              <!-- Name Input -->
+              <div class="form-group">
+                <label for="contact-name" class="form-label">
+                  <span>Your Name</span>
+                  <span aria-hidden="true">*Required</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="contact-name" 
+                  name="name" 
+                  class="form-input" 
+                  placeholder="e.g. Alex Henderson" 
+                  required 
+                  minlength="2"
+                  maxlength="100"
+                  autocomplete="name"
+                >
+              </div>
+
+              <!-- Email Input -->
+              <div class="form-group">
+                <label for="contact-email" class="form-label">
+                  <span>Email Address</span>
+                  <span aria-hidden="true">*Required</span>
+                </label>
+                <input 
+                  type="email" 
+                  id="contact-email" 
+                  name="email" 
+                  class="form-input" 
+                  placeholder="alex@company.com" 
+                  required 
+                  autocomplete="email"
+                >
+              </div>
+
+              <!-- Subject Input -->
+              <div class="form-group">
+                <label for="contact-subject" class="form-label">
+                  <span>Subject</span>
+                  <span aria-hidden="true">*Required</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="contact-subject" 
+                  name="subject" 
+                  class="form-input" 
+                  placeholder="e.g. Hackathon Team / Internship Opportunity" 
+                  required 
+                  minlength="2"
+                  maxlength="200"
+                >
+              </div>
+
+              <!-- Message Input -->
+              <div class="form-group">
+                <label for="contact-message" class="form-label">
+                  <span>Message</span>
+                  <span aria-hidden="true">*Required</span>
+                </label>
+                <textarea 
+                  id="contact-message" 
+                  name="message" 
+                  class="form-textarea" 
+                  placeholder="Write your note, project inquiry, or collaboration idea here..." 
+                  required 
+                  minlength="5"
+                  maxlength="5000"
+                ></textarea>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" id="contact-submit-btn" class="btn btn-primary" style="width: 100%;">
+                <span class="btn-text">Send Message</span>
+                <div class="spinner" aria-hidden="true"></div>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================================
+       FOOTER
+       ========================================================================= -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <a href="#hero" class="brand-logo" style="margin-bottom: 12px; display: inline-flex;">
+            <span class="brand-icon">DT</span>
+            <span>{{ personal_info.name }}</span>
+          </a>
+          <p class="footer-desc">
+            First-year B.Tech CSE student at NIAT, S-VYASA University. Backend, databases and computer vision.
+          </p>
+        </div>
+
+        <!-- Back to Top CTA -->
+        <a href="#hero" id="back-to-top-btn" class="back-to-top-btn" aria-label="Back to top of page">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+          <span>Back to Top</span>
+        </a>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; {{ current_year }} {{ personal_info.name }}. All rights reserved.</p>
+        <div class="footer-tech-stack">
+          <span>Engineered with HTML5, CSS3, Vanilla JS &amp; FastAPI.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Vanilla JavaScript Client Logic (Zero external dependencies) -->
+  <script src="/static/js/main.js"></script>
+</body>
+</html>
+

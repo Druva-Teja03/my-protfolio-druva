@@ -1,0 +1,112 @@
+[
+  {
+    "category": "Languages",
+    "category_id": "languages",
+    "icon": "code",
+    "description": "The languages I use across backend, data and web work.",
+    "skills": [
+      {
+        "name": "Python",
+        "used_in": "Both SIH projects",
+        "highlight": "FastAPI services, OpenCV / YOLOv8 pipelines, geospatial analytics"
+      },
+      {
+        "name": "SQL",
+        "used_in": "CityVision, Watershed",
+        "highlight": "Schema design, stored procedures, views, spatial queries"
+      },
+      {
+        "name": "JavaScript",
+        "used_in": "All three projects",
+        "highlight": "Vanilla dashboards, fetch-based includes, Node.js / Express"
+      }
+    ]
+  },
+  {
+    "category": "Web & Backend",
+    "category_id": "backend",
+    "icon": "server",
+    "description": "REST backends with authentication, validation and responsive front ends.",
+    "skills": [
+      {
+        "name": "FastAPI",
+        "used_in": "CityVision, Watershed",
+        "highlight": "REST APIs, Pydantic v2 validation, JWT authentication"
+      },
+      {
+        "name": "Node.js / Express",
+        "used_in": "Preschool site",
+        "highlight": "Lead-capture endpoint, Basic Auth-protected admin route"
+      },
+      {
+        "name": "HTML, CSS & responsive design",
+        "used_in": "Preschool site",
+        "highlight": "Mobile, tablet and desktop breakpoints"
+      }
+    ]
+  },
+  {
+    "category": "Databases",
+    "category_id": "database",
+    "icon": "database",
+    "description": "Relational design for real data: spatial, analytical and transactional.",
+    "skills": [
+      {
+        "name": "MySQL 8.0",
+        "used_in": "All three projects",
+        "highlight": "ST_Distance_Sphere de-duplication, SLA and hotspot views"
+      },
+      {
+        "name": "SQLAlchemy",
+        "used_in": "Watershed",
+        "highlight": "SQLAlchemy 2.0 ORM with automatic MySQL to SQLite fallback"
+      }
+    ]
+  },
+  {
+    "category": "AI & Geospatial",
+    "category_id": "ai",
+    "icon": "cpu",
+    "description": "Computer vision and location analytics applied to civic problems.",
+    "skills": [
+      {
+        "name": "OpenCV",
+        "used_in": "Watershed",
+        "highlight": "Laplacian sharpness, CLAHE, HSV segmentation, contour bounding boxes"
+      },
+      {
+        "name": "YOLOv8 (Ultralytics)",
+        "used_in": "CityVision",
+        "highlight": "Pothole, garbage, traffic-density and accident detection"
+      },
+      {
+        "name": "Google Maps JavaScript API",
+        "used_in": "Watershed, CityVision",
+        "highlight": "Watershed polygons and a live city incident map"
+      },
+      {
+        "name": "Haversine & point-in-polygon",
+        "used_in": "Watershed",
+        "highlight": "Spatial and temporal analytics"
+      }
+    ]
+  },
+  {
+    "category": "Tools & Creative",
+    "category_id": "tools",
+    "icon": "terminal",
+    "description": "Everyday tooling plus a creative side in design and video.",
+    "skills": [
+      {
+        "name": "VS Code, Git & GitHub",
+        "used_in": "Daily",
+        "highlight": "Version control and project workflow"
+      },
+      {
+        "name": "Adobe Photoshop & Premiere Pro",
+        "used_in": "Creative work",
+        "highlight": "Image and video editing"
+      }
+    ]
+  }
+]

@@ -1,0 +1,31 @@
+# ==============================================================================
+# REQUIREMENTS.TXT
+# Purpose:
+#   Specifies all Python package dependencies needed to run the portfolio backend.
+#
+# How to install:
+#   pip install -r requirements.txt
+# ==============================================================================
+
+# FastAPI: High-performance, asynchronous web framework for building modern APIs
+fastapi>=0.110.0
+
+# Uvicorn: Lightning-fast ASGI web server implementation to run FastAPI
+uvicorn[standard]>=0.28.0
+
+# Jinja2: Modern and designer-friendly templating language for Python
+jinja2>=3.1.3
+
+# SQLAlchemy: Industry-standard SQL toolkit and Object Relational Mapper (ORM)
+sqlalchemy>=2.0.28
+
+# Pydantic: Data validation and settings management using Python type annotations
+pydantic>=2.6.4
+
+# Email Validator: Enables strict email format validation in Pydantic models
+email-validator>=2.1.0
+
+# Python Multipart: Required by FastAPI to process form data submissions
+python-multipart>=0.0.9
+
+python-dotenv>=1.0.0

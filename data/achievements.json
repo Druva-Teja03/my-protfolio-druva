@@ -1,0 +1,52 @@
+[
+  {
+    "id": "vp-advanced-tech-club",
+    "role": "Vice President",
+    "organization": "Advanced Tech Club — NIAT, S-VYASA Bangalore",
+    "period": "Oct 2026 — Present",
+    "category": "Leadership",
+    "badge": "Leadership",
+    "description": "Appointed Vice President of the student-run technical club at NIAT, S-VYASA Bangalore, responsible for planning and executing club events and activities.",
+    "highlights": [
+      "Lead a core team of five department heads: Operations, Outreach, Creative & Design, Finance and Social Media",
+      "Delegate responsibilities and coordinate the team across event planning and execution"
+    ]
+  },
+  {
+    "id": "sih-watershed",
+    "role": "Team Lead",
+    "organization": "Smart India Hackathon 2026 · PS SIH26015 (Ministry of Rural Development)",
+    "period": "Sep 2026",
+    "category": "Hackathon",
+    "badge": "SIH 2026 · Internal round",
+    "description": "Led the team on geospatial techniques for geo-coded images and watershed development, at the college-level internal round.",
+    "highlights": [
+      "Directed the build of the MobiSense Watershed Intelligence prototype: EXIF GPS extraction, watershed boundary mapping, OpenCV / YOLO detection and before/after change detection on a Google Maps dashboard"
+    ]
+  },
+  {
+    "id": "sih-bel",
+    "role": "Team Lead",
+    "organization": "Smart India Hackathon 2026 · PS SIH26124 (Bharat Electronics Limited, Smart Automation)",
+    "period": "Sep 2026",
+    "category": "Hackathon",
+    "badge": "SIH 2026 · Internal round",
+    "description": "Led the team through ideation, solution design and presentation at the college-level internal round.",
+    "highlights": [
+      "Selected to represent the college in the SIH screening round",
+      "Prepared and submitted the team's solution presentation on the official SIH portal"
+    ]
+  },
+  {
+    "id": "innovatex",
+    "role": "Team Lead",
+    "organization": "InnovateX — Intra-College Hackathon",
+    "period": "Sep 2026",
+    "category": "Hackathon",
+    "badge": "College hackathon",
+    "description": "Led the team on the same BEL Smart Automation problem statement (SIH26124) in a fast-paced, time-boxed setting.",
+    "highlights": [
+      "Guided solution iteration and the final presentation"
+    ]
+  }
+]

@@ -1,0 +1,80 @@
+[
+  {
+    "id": "mobisense-cityvision",
+    "title": "MobiSense CityVision",
+    "tagline": "AI-powered municipal incident detection platform",
+    "category": "Team project · Smart India Hackathon 2026 · Backend & Database Developer",
+    "summary": "I designed the MySQL 8.0 database and built the FastAPI backend. Detections from YOLOv8 scripts (potholes, garbage, traffic density, accidents) are ingested, de-duplicated by location, and shown on a live city dashboard.",
+    "technologies": [
+      "Python",
+      "FastAPI",
+      "MySQL 8.0",
+      "YOLOv8",
+      "JWT",
+      "bcrypt",
+      "JavaScript"
+    ],
+    "github_url": "https://github.com/Druva-Teja03/MobiSense",
+    "demo_url": "",
+    "image": "/static/images/project-mobisense.png",
+    "featured": true,
+    "highlights": [
+      "Spatial de-duplication engine using ST_Distance_Sphere with per-category radii and a running centroid, so repeat detections of one pothole merge into a single issue",
+      "JWT authentication with bcrypt hashing; signup restricted to whitelisted government employee IDs through a foreign key",
+      "SQL views for SLA tracking and recurring hotspots, plus an accident alert log that routes to the relevant departments",
+      "Ingest client buffers detections offline and replays them in order when connectivity returns"
+    ]
+  },
+  {
+    "id": "mobisense-watershed",
+    "title": "MobiSense Watershed Intelligence",
+    "tagline": "Geospatial decision-support platform",
+    "category": "Prototype · SIH 2026 PS SIH26015 · Ministry of Rural Development",
+    "summary": "A prototype that turns geo-tagged field photographs into watershed insights: it reads GPS from EXIF metadata, maps each photo to its watershed boundary, and runs AI feature detection on the image.",
+    "technologies": [
+      "Python",
+      "FastAPI",
+      "SQLAlchemy 2.0",
+      "Pydantic v2",
+      "MySQL / SQLite",
+      "OpenCV",
+      "YOLO",
+      "Google Maps API",
+      "JavaScript"
+    ],
+    "github_url": "https://github.com/Druva-Teja03/watershed",
+    "demo_url": "",
+    "image": "/static/images/project-watershed.png",
+    "featured": true,
+    "highlights": [
+      "FastAPI backend with 20+ REST endpoints; runs on MySQL 8.0 and falls back to SQLite automatically when MySQL is unavailable",
+      "Haversine distance, ray-casting point-in-polygon containment, and before/after change detection on vegetation and water indicators",
+      "OpenCV pipeline: Laplacian sharpness check, CLAHE contrast normalisation, HSV segmentation of vegetation, water and soil",
+      "8-page vanilla JavaScript dashboard with Google Maps polygons, a before/after slider and printable reports, backed by automated test scripts"
+    ]
+  },
+  {
+    "id": "preschool-platform",
+    "title": "Multi-Page Preschool Website",
+    "tagline": "Responsive full-stack site with a protected admin route",
+    "category": "Independent project · 2026",
+    "summary": "A five-page responsive website (Home, About, Academics, Gallery, Contact) taken from first HTML structure to a full responsive overhaul across mobile, tablet and desktop, with a Node.js backend behind it.",
+    "technologies": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Node.js",
+      "Express",
+      "MySQL"
+    ],
+    "github_url": "https://github.com/Druva-Teja03/Happy-Kids-Website",
+    "demo_url": "",
+    "image": "/static/images/project-preschool.png",
+    "featured": true,
+    "highlights": [
+      "Node.js and Express backend with a MySQL database and a lead-capture API endpoint",
+      "Basic Auth-protected admin route for managing form submissions",
+      "Reusable shared header loaded with a JavaScript fetch-based include, removing duplicated markup across pages"
+    ]
+  }
+]

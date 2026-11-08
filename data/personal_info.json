@@ -1,0 +1,60 @@
+{
+  "name": "Druva Teja C",
+  "first_name": "Druva",
+  "title": "Backend & AI Developer",
+  "headline": "B.Tech CSE Student • FastAPI & MySQL • Computer Vision",
+  "roles": [
+    "Backend Developer",
+    "Python & FastAPI Developer",
+    "Computer Vision Builder",
+    "Hackathon Team Lead",
+    "Aspiring SDE Intern"
+  ],
+  "status_badge": "Open to SDE internships & junior developer roles",
+  "location": "Bengaluru, Karnataka, India",
+  "email": "druvateja08@gmail.com",
+  "github_url": "https://github.com/Druva-Teja03",
+  "linkedin_url": "https://www.linkedin.com/in/druva-teja-c/",
+  "resume_url": "/static/assets/druva-teja-resume.pdf",
+  "short_bio": "First-year B.Tech CSE student at NIAT, S-VYASA University, building REST backends, MySQL databases and computer-vision pipelines with Python, FastAPI and YOLOv8.",
+  "hero_description": "First-year Computer Science student who builds REST backends, MySQL databases and AI computer-vision pipelines. Two Smart India Hackathon 2026 prototypes shipped, and Vice President of the Advanced Tech Club.",
+  "about": {
+    "section_title": "A first-year student who already ships full-stack systems",
+    "cards": [
+      {
+        "title": "Who I am",
+        "text": "I'm a first-year B.Tech Computer Science & Engineering student at NIAT, S-VYASA University in Bengaluru. I work in Python, SQL, FastAPI and JavaScript, and I learn by building complete projects: a REST backend with a MySQL database, an AI computer-vision pipeline, and a deployed multi-page website."
+      },
+      {
+        "title": "What I build",
+        "text": "Backends and data layers. That means MySQL schemas with stored procedures and spatial de-duplication, JWT-secured FastAPI services, and YOLOv8 / OpenCV pipelines that turn camera footage and geo-tagged photos into structured, queryable data."
+      },
+      {
+        "title": "Education",
+        "text": "B.Tech in Computer Science & Engineering, NIAT, S-VYASA University. Pre-University in Physics, Chemistry, Mathematics and Computer Science at Sri Kumaran Children's Home PU College. Secondary school at Holy Saint High School."
+      },
+      {
+        "title": "Interests & goals",
+        "text": "I care about software architecture, cybersecurity, clean code, data structures and algorithms, and problem solving. I'm looking for an SDE internship or junior developer role where I can apply a builder's mindset to real-world software."
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "label": "Hackathon teams led",
+      "value": "3"
+    },
+    {
+      "label": "REST endpoints built",
+      "value": "20+"
+    },
+    {
+      "label": "AI & vision platforms",
+      "value": "2"
+    },
+    {
+      "label": "Club department heads led",
+      "value": "5"
+    }
+  ]
+}
