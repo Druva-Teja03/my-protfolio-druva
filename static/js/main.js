@@ -454,7 +454,28 @@ function initContactForm() {
       const data = await response.json();
 
       if (response.ok && data.success) {
-        showFeedback(data.message || "Message sent successfully!", "success");
+        const emailResponse = await fetch("https://api.web3forms.com/submit", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Accept": "application/json"
+  },
+  body: JSON.stringify({
+    access_key: "3050e732-ac73-4914-bc4d-9f30549be950",
+    name: payload.name,
+    email: payload.email,
+    subject: `[Portfolio] ${payload.subject}`,
+    message: payload.message
+  })
+});
+
+const emailData = await emailResponse.json();
+
+if (!emailResponse.ok || !emailData.success) {
+  showFeedback("Message saved, but the email notification failed.", "error");
+  return;
+}
+showFeedback(data.message || "Message sent successfully!", "success");
         form.reset(); // Clear all input fields
       } else {
         // Handle validation errors from FastAPI/Pydantic

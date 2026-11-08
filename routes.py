@@ -36,7 +36,7 @@ import os
 import re
 import json
 from typing import Dict, Any, List
-from fastapi import APIRouter, Request, Depends, HTTPException, status, BackgroundTasks
+from fastapi import APIRouter, Request, Depends, HTTPException, status
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel, Field, field_validator
@@ -44,7 +44,6 @@ from sqlalchemy.orm import Session
 
 from database import get_db
 from models import ContactSubmission
-from email_service import send_contact_email
 
 # -----------------------------------------------------------------------------
 # STEP 1: Router & Template Initialization
@@ -174,7 +173,6 @@ async def render_portfolio(request: Request):
 @router.post("/contact", summary="Submit Contact Inquiries")
 async def submit_contact(
     payload: ContactFormSchema,
-    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db)
 ):
     """
@@ -208,14 +206,6 @@ async def submit_contact(
         db.add(new_submission)
         db.commit()
         db.refresh(new_submission)
-
-        background_tasks.add_task(
-            send_contact_email,
-            new_submission.name,
-            new_submission.email,
-            new_submission.subject,
-            new_submission.message,
-        )
 
         return JSONResponse(
             status_code=status.HTTP_201_CREATED,
