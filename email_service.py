@@ -48,6 +48,9 @@ def send_contact_email(name: str, email: str, subject: str, message: str) -> Non
         headers={
             "Authorization": f"Bearer {RESEND_API_KEY}",
             "Content-Type": "application/json",
+            # Send a clear client identity; API gateways may reject generic
+            # or missing user-agent signatures with HTTP 403 / code 1010.
+            "User-Agent": "druva-portfolio/1.0",
         },
         method="POST",
     )
